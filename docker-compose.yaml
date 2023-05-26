@@ -1,0 +1,24 @@
+version: "2"
+
+services:
+  rate-tracker:
+    image: 'rate-tracker:lts'
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    container_name: 'rates'
+    ports:
+      - '9090:8080'
+    environment:
+      - EMAIL_HOST=mailhog
+      - EMAIL_PORT=1025
+      - EMAIL_USERNAME=AB
+      - EMAIL_PASSWORD=password
+      - RATE_PROVIDER_URL=https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=UAH
+      - DATABASE_URL=subscriptions.txt
+  mailhog:
+    image: mailhog/mailhog
+    container_name: 'mailhog'
+    ports:
+      - "1025:1025"
+      - "8025:8025"
