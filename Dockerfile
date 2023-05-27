@@ -6,7 +6,7 @@ COPY . .
 
 RUN go build -o app .
 
-###########
+##########
 
 FROM alpine:latest
 
